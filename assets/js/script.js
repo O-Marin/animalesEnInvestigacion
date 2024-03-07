@@ -1,8 +1,7 @@
 //Imports
 import { Leon, Serpiente, Oso, Aguila, Lobo } from "./modules/animal.js";
 import {selectedAnimal,selectedEdad,comentarios,preview} from "./modules/funciones.js";
-import { agregarAnimal } from "./modules/funciones.js";
-import { fetchPreviewImage, createAnimalObject, animalesArray } from "./modules/async.js";
+import { fetchPreviewImage, createAnimalObject, animalesArray, agregarAnimal } from "./modules/async.js";
 //variable del boton de registro de formulario para agregar el evento click
 let registrar = document.querySelector("#btnRegistrar");
 

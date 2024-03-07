@@ -12,5 +12,5 @@ function capturarDatosFormulario() {
   return [animal, edad, comentario];
 }
 
-export { agregarAnimal, capturarDatosFormulario };
-export { preview, selectedAnimal, selectedEdad, comentarios };
+export {capturarDatosFormulario };
+export {preview, selectedAnimal, selectedEdad, comentarios };

@@ -116,4 +116,4 @@ function agregarAnimal(img) {
   `;
 }
 
-export { fetchPreviewImage, createAnimalObject, animalesArray, agregarAnimal };
+export {fetchPreviewImage, createAnimalObject, animalesArray, agregarAnimal};
