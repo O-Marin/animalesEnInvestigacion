@@ -9,7 +9,6 @@ let animalesArray = [];
 const selectedAnimal = document.querySelector("#animal");
 const preview = document.querySelector("#preview");
 const img = document.createElement("img");
-
 const json = "../../../animales.json";
 
 //Funcion que contiene la logica para colocar la imagen de preview en el Html dependiendo del animal seleccionado.

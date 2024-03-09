@@ -1,6 +1,6 @@
 //Imports
 import { Leon, Serpiente, Oso, Aguila, Lobo } from "./modules/animal.js";
-import {selectedAnimal,selectedEdad,comentarios,preview} from "./modules/funciones.js";
+import {selectedAnimal,selectedEdad,comentarios,preview, resetFormulario} from "./modules/funciones.js";
 import { fetchPreviewImage, createAnimalObject, animalesArray, agregarAnimal } from "./modules/async.js";
 //variable del boton de registro de formulario para agregar el evento click
 let registrar = document.querySelector("#btnRegistrar");
@@ -20,6 +20,7 @@ let registrar = document.querySelector("#btnRegistrar");
   //evento captura informacion formulario
   registrar.addEventListener("click", async ()=>{
     console.log(await createAnimalObject());
+    resetFormulario();
   });
 })();
 

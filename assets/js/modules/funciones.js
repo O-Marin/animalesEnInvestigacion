@@ -1,9 +1,13 @@
+import { fetchPreviewImage } from "./async.js";
+
 //elementos html
 const selectedAnimal = document.querySelector("#animal");
 const selectedEdad = document.querySelector("#edad");
 const comentarios = document.querySelector("#comentarios");
 const preview = document.querySelector("#preview");
-const botonSonido = document.querySelector('#botonSonido');
+const img = document.createElement("img");
+
+
 
 //capturar elementos desde formulario
 function capturarDatosFormulario() {
@@ -13,13 +17,13 @@ function capturarDatosFormulario() {
   return [animal, edad, comentario];
 }
 
-function resetFormulario(){
+async function resetFormulario(){
+
   selectedAnimal.selectedIndex = 0;
   selectedEdad.selectedIndex = 0;
   comentarios.value = '';
-
+  await fetchPreviewImage();
+  
 }
-
-
 export {capturarDatosFormulario };
 export {preview, selectedAnimal, selectedEdad, comentarios, resetFormulario};
