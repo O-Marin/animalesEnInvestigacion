@@ -38,7 +38,9 @@ async function createAnimalObject() {
 
   for (let animal of data.animales) {
     //nombre, edad, comentarios, img, sonido
-    if (animal.name === datosFormulario[0]) {
+
+    if (animal.name === datosFormulario[0] && datosFormulario[0] === "Leon") {
+      console.log(datosFormulario);
       animalesArray.push(
         new Leon(
           datosFormulario[0],
@@ -50,7 +52,11 @@ async function createAnimalObject() {
       );
       agregarAnimal(animal.imagen);
       return animalesArray;
-    } else if (animal.name === datosFormulario[0]) {
+    } else if (
+      animal.name === datosFormulario[0] &&
+      datosFormulario[0] === "Lobo"
+    ) {
+      console.log("estoy aca");
       animalesArray.push(
         new Lobo(
           datosFormulario[0],
@@ -62,7 +68,12 @@ async function createAnimalObject() {
       );
       agregarAnimal(animal.imagen);
       return animalesArray;
-    } else if (animal.name === datosFormulario[0]) {
+    } else if (
+      animal.name === datosFormulario[0] &&
+      datosFormulario[0] === "Oso"
+    ) {
+      //si entra aca pero es el animal el que esta equivocado,  tengo que asegurarme de que el animal sea el correcto,
+
       animalesArray.push(
         new Oso(
           datosFormulario[0],
@@ -74,7 +85,10 @@ async function createAnimalObject() {
       );
       agregarAnimal(animal.imagen);
       return animalesArray;
-    } else if (animal.name === datosFormulario[0]) {
+    } else if (
+      animal.name === datosFormulario[0] &&
+      datosFormulario[0] === "Serpiente"
+    ) {
       animalesArray.push(
         new Serpiente(
           datosFormulario[0],
@@ -86,7 +100,10 @@ async function createAnimalObject() {
       );
       agregarAnimal(animal.imagen);
       return animalesArray;
-    } else if (animal.name === datosFormulario[0]) {
+    } else if (
+      animal.name === datosFormulario[0] &&
+      datosFormulario[0] === "Aguila"
+    ) {
       animalesArray.push(
         new Aguila(
           datosFormulario[0],
@@ -102,7 +119,9 @@ async function createAnimalObject() {
   }
 }
 
-function agregarAnimal(img) {
+function agregarAnimal(img, type) {
+  //usar type como clase del boton para tener un identificador y poder tener un punto de referencia para agregar el sonido.
+  let xbutton = `<button class="${type}"><img src="./assets/imgs/volume.png"></button>`;
   let xelement = `<img src='${img}' alt='hola que hace' class='card-img-top' style='max-width:100%; height:300px' >`;
 
   let animales = document.querySelector("#Animales");
@@ -115,4 +134,28 @@ function agregarAnimal(img) {
   `;
 }
 
-export {fetchPreviewImage, createAnimalObject, animalesArray, agregarAnimal};
+/** necesito esta funcion que haga el sonido
+ * esta testeada y funciona, se debe implementar en este proyecto
+ */
+async function playAudio() {
+  let response = await fetch(json);
+  let data = await response.json();
+  /** en esta funcion no se preview, el array que quiero recorrer creo que es el de los elementos button de las cards */
+  console.log(document.querySelectorAll("#Animales button"));
+
+  //comparar la imagen de la tarjeta con el array de animales para saber que sonido elegir.
+  document.querySelectorAll("#Animales button").forEach((boton, index) => {
+    console.log(boton);
+    boton.addEventListener("click", () => {
+      new Audio(animalesArray[index].sonido).play();
+    });
+  });
+}
+
+export {
+  fetchPreviewImage,
+  createAnimalObject,
+  animalesArray,
+  agregarAnimal,
+  playAudio,
+};

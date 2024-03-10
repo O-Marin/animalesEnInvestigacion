@@ -13,7 +13,7 @@
     {
       "name": "Oso",
       "imagen": "./assets/imgs/Oso.jpg",
-      "sonido":"./assets/sounds/Gruñido.mp3"
+      "sonido":"./assets/sounds/Grunido.mp3"
     },
     {
       "name": "Serpiente",

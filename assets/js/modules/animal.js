@@ -78,3 +78,13 @@ class Aguila extends Animal {
 }
 
 export { Leon, Serpiente, Oso, Aguila, Lobo };
+  /** 
+function playAudio(sonido) {
+  audio.play();
+}
+document.getElementById("myButton").addEventListener("click", ()=>{
+
+  playAudio();
+  console.log(audio.duration);   
+});
+*/

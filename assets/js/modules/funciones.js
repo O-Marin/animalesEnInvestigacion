@@ -7,8 +7,6 @@ const comentarios = document.querySelector("#comentarios");
 const preview = document.querySelector("#preview");
 const img = document.createElement("img");
 
-
-
 //capturar elementos desde formulario
 function capturarDatosFormulario() {
   let animal = selectedAnimal.value;
@@ -17,13 +15,12 @@ function capturarDatosFormulario() {
   return [animal, edad, comentario];
 }
 
-async function resetFormulario(){
-
+async function resetFormulario() {
   selectedAnimal.selectedIndex = 0;
   selectedEdad.selectedIndex = 0;
-  comentarios.value = '';
+  comentarios.value = "";
   await fetchPreviewImage();
-  
 }
-export {capturarDatosFormulario };
-export {preview, selectedAnimal, selectedEdad, comentarios, resetFormulario};
+
+export { capturarDatosFormulario };
+export { preview, selectedAnimal, selectedEdad, comentarios, resetFormulario };
