@@ -3,7 +3,10 @@
  */
 //imports
 import { Leon, Serpiente, Oso, Aguila, Lobo } from "./animal.js";
-import { capturarDatosFormulario } from "./funciones.js";
+import {
+  capturarDatosFormulario,
+  validarDatosFormulario,
+} from "./funciones.js";
 
 let animalesArray = [];
 const selectedAnimal = document.querySelector("#animal");
@@ -28,99 +31,92 @@ async function fetchPreviewImage() {
   });
 }
 
-//Funcion que rellena un array con los nuevos objectos creados para posterior uso.
 async function createAnimalObject() {
   let response = await fetch(json);
   let data = await response.json();
 
-  // datos capturados del formulario
-  let datosFormulario = capturarDatosFormulario();
+  let datosFormulario = validarDatosFormulario(); //capturarDatosFormulario();
 
-  for (let animal of data.animales) {
-    //nombre, edad, comentarios, img, sonido
-
-    if (animal.name === datosFormulario[0] && datosFormulario[0] === "Leon") {
-      console.log(datosFormulario);
-      animalesArray.push(
-        new Leon(
-          datosFormulario[0],
-          datosFormulario[1],
-          datosFormulario[2],
-          animal.imagen,
-          animal.sonido
-        )
-      );
-      agregarAnimal(animal.imagen);
-      return animalesArray;
-    } else if (
-      animal.name === datosFormulario[0] &&
-      datosFormulario[0] === "Lobo"
-    ) {
-      console.log("estoy aca");
-      animalesArray.push(
-        new Lobo(
-          datosFormulario[0],
-          datosFormulario[1],
-          datosFormulario[2],
-          animal.imagen,
-          animal.sonido
-        )
-      );
-      agregarAnimal(animal.imagen);
-      return animalesArray;
-    } else if (
-      animal.name === datosFormulario[0] &&
-      datosFormulario[0] === "Oso"
-    ) {
-      //si entra aca pero es el animal el que esta equivocado,  tengo que asegurarme de que el animal sea el correcto,
-
-      animalesArray.push(
-        new Oso(
-          datosFormulario[0],
-          datosFormulario[1],
-          datosFormulario[2],
-          animal.imagen,
-          animal.sonido
-        )
-      );
-      agregarAnimal(animal.imagen);
-      return animalesArray;
-    } else if (
-      animal.name === datosFormulario[0] &&
-      datosFormulario[0] === "Serpiente"
-    ) {
-      animalesArray.push(
-        new Serpiente(
-          datosFormulario[0],
-          datosFormulario[1],
-          datosFormulario[2],
-          animal.imagen,
-          animal.sonido
-        )
-      );
-      agregarAnimal(animal.imagen);
-      return animalesArray;
-    } else if (
-      animal.name === datosFormulario[0] &&
-      datosFormulario[0] === "Aguila"
-    ) {
-      animalesArray.push(
-        new Aguila(
-          datosFormulario[0],
-          datosFormulario[1],
-          datosFormulario[2],
-          animal.imagen,
-          animal.sonido
-        )
-      );
-      agregarAnimal(animal.imagen);
-      return animalesArray;
+  if (datosFormulario) {
+    for (let animal of data.animales) {
+      if (animal.name === datosFormulario[0] && datosFormulario[0] === "Leon") {
+        animalesArray.push(
+          new Leon(
+            datosFormulario[0],
+            datosFormulario[1],
+            datosFormulario[2],
+            animal.imagen,
+            animal.sonido
+          )
+        );
+        agregarAnimal(animal.imagen, animal.name);
+        return animalesArray;
+      } else if (
+        animal.name === datosFormulario[0] &&
+        datosFormulario[0] === "Lobo"
+      ) {
+        animalesArray.push(
+          new Lobo(
+            datosFormulario[0],
+            datosFormulario[1],
+            datosFormulario[2],
+            animal.imagen,
+            animal.sonido
+          )
+        );
+        agregarAnimal(animal.imagen, animal.name);
+        return animalesArray;
+      } else if (
+        animal.name === datosFormulario[0] &&
+        datosFormulario[0] === "Oso"
+      ) {
+        animalesArray.push(
+          new Oso(
+            datosFormulario[0],
+            datosFormulario[1],
+            datosFormulario[2],
+            animal.imagen,
+            animal.sonido
+          )
+        );
+        agregarAnimal(animal.imagen, animal.name);
+        return animalesArray;
+      } else if (
+        animal.name === datosFormulario[0] &&
+        datosFormulario[0] === "Serpiente"
+      ) {
+        animalesArray.push(
+          new Serpiente(
+            datosFormulario[0],
+            datosFormulario[1],
+            datosFormulario[2],
+            animal.imagen,
+            animal.sonido
+          )
+        );
+        agregarAnimal(animal.imagen, animal.name);
+        return animalesArray;
+      } else if (
+        animal.name === datosFormulario[0] &&
+        datosFormulario[0] === "Aguila"
+      ) {
+        animalesArray.push(
+          new Aguila(
+            datosFormulario[0],
+            datosFormulario[1],
+            datosFormulario[2],
+            animal.imagen,
+            animal.sonido
+          )
+        );
+        agregarAnimal(animal.imagen, animal.name);
+        return animalesArray;
+      }
     }
   }
 }
 
 function agregarAnimal(img, type) {
-  //usar type como clase del boton para tener un identificador y poder tener un punto de referencia para agregar el sonido.
   let xbutton = `<button class="${type}"><img src="./assets/imgs/volume.png"></button>`;
   let xelement = `<img src='${img}' alt='hola que hace' class='card-img-top' style='max-width:100%; height:300px' >`;
 
@@ -128,28 +124,33 @@ function agregarAnimal(img, type) {
   animales.innerHTML += `<div class="card" style="width: 18rem;">
   ${xelement}
   <div class="card-body p-0">
-  <button><img src="./assets/imgs/volume.png"></button>
+  ${xbutton}
   </div>
   </div>
   `;
 }
 
-/** necesito esta funcion que haga el sonido
- * esta testeada y funciona, se debe implementar en este proyecto
- */
 async function playAudio() {
   let response = await fetch(json);
   let data = await response.json();
-  /** en esta funcion no se preview, el array que quiero recorrer creo que es el de los elementos button de las cards */
-  console.log(document.querySelectorAll("#Animales button"));
 
-  //comparar la imagen de la tarjeta con el array de animales para saber que sonido elegir.
+  modal();
   document.querySelectorAll("#Animales button").forEach((boton, index) => {
-    console.log(boton);
     boton.addEventListener("click", () => {
       new Audio(animalesArray[index].sonido).play();
     });
   });
+}
+
+async function modal() {
+  let response = await fetch(json);
+  let data = await response.json();
+
+  /** Aca debe ir un for each, no se puede agregar event listener a un node list
+  document.querySelectorAll("#Animales .card-img-top").addEventListener('click',()=>{
+    document.querySelector('body')
+  })
+   */
 }
 
 export {
